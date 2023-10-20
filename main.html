@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #fetchDataButton {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #temperatureChartContainer {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        #temperatureChart {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temperature Data Chart</h1>
+
+    <button id="fetchDataButton">Fetch Data</button>
+
+    <div id="temperatureChartContainer">
+        <canvas id="temperatureChart"></canvas>
+    </div>
+
+    <script>
+        // Function to create the temperature chart
+        function createTemperatureChart(labels, data) {
+            const ctx = document.getElementById('temperatureChart').getContext('2d');
+            return new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Temperature (°C)',
+                            data: data,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            fill: false,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                },
+            });
+        }
+
+        // Function to update the chart with new data
+        function updateChart(chart, labels, data) {
+            chart.data.labels = labels;
+            chart.data.datasets[0].data = data;
+            chart.update();
+        }
+
+        // Event listener for the "Fetch Data" button
+        const fetchDataButton = document.getElementById('fetchDataButton');
+        fetchDataButton.addEventListener('click', function() {
+            // Redirect to the historical data page
+            window.location.href = 'historical.html';
+        });
+
+        // Simulated data for testing
+        const labels = [];
+        const data = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]; // Replace with your actual data
+
+        const chart = createTemperatureChart(labels, data);
+    </script>
+</body>
+</html>

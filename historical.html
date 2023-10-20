@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Historical Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #historicalData {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        #backToMainButton {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Historical Data</h1>
+
+    <!-- Button to return to the main page -->
+    <button id="backToMainButton">Back to Main</button>
+
+    <!-- Display historical data in a table -->
+    <div id="historicalData">
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Temperature (°C)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Historical data will be displayed here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to generate historical dummy data
+        function generateHistoricalData(count) {
+            const data = [];
+            for (let i = 0; i < count; i++) {
+                data.push(Math.random() * 10 + 20);
+            }
+            return data;
+        }
+
+        // Function to populate the historical data table
+        function populateHistoricalData() {
+            // Generate dummy historical data (replace this with actual data retrieval)
+            const historicalData = generateHistoricalData(10);
+
+            // Display dummy historical data in the table
+            const historicalDataTable = document.querySelector('#historicalData tbody');
+            historicalDataTable.innerHTML = ''; // Clear existing data
+            historicalData.forEach((item, index) => {
+                const row = document.createElement('tr');
+                const timestampCell = document.createElement('td');
+                const temperatureCell = document.createElement('td');
+
+                if (index % 2 === 0) {
+                    row.className = 'even';
+                }
+
+                timestampCell.textContent = new Date().toLocaleTimeString();
+                temperatureCell.textContent = item.toFixed(2); // Limit decimal places
+
+                row.appendChild(timestampCell);
+                row.appendChild(temperatureCell);
+                historicalDataTable.appendChild(row);
+            });
+        }
+
+        // Add an event listener to the "Back to Main" button
+        const backToMainButton = document.getElementById('backToMainButton');
+        backToMainButton.addEventListener('click', () => {
+            // Navigate back to the main page
+            window.location.href = 'main.html';
+        });
+
+        // Populate the historical data on page load
+        populateHistoricalData();
+    </script>
+</body>
+</html>
