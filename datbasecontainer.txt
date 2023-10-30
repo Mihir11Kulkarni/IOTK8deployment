@@ -1,0 +1,20 @@
+# Use a minimal Alpine Linux image for the container
+FROM alpine:latest
+
+# Set the working directory
+WORKDIR /app
+
+# Install SQLite
+RUN apk --no-cache add sqlite
+
+# Create a directory for the database
+RUN mkdir /data
+
+# Copy the SQLite database file into the container
+COPY mydatabase.db /data/
+
+# Expose the volume for data persistence
+VOLUME /data
+
+# Specify the command to run when the container starts
+CMD ["sqlite3", "/data/mydatabase.db"]

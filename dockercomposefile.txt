@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  main-container:
+    image: my-main-container
+    build: ./main-container  # Path to the directory containing your main container Dockerfile and application files
+    ports:
+      - "8080:8080"  # Map port 8080 in the container to port 8080 on the host
+    networks:
+      - my-iot-network
+    depends_on:
+      - sidecar-container
+
+  sidecar-container:
+    image: my-sidecar-container
+    build: ./sidecar-container  # Path to the directory containing your sidecar container Dockerfile and database file
+    networks:
+      - my-iot-network
+
+networks:
+  my-iot-network:
